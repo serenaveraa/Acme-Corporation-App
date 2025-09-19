@@ -1,4 +1,3 @@
-import React from 'react'
 
 interface PaginationProps {
   currentPage: number
@@ -7,7 +6,7 @@ interface PaginationProps {
   loading: boolean
 }
 
-const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange, loading }) => {
+function Pagination({ currentPage, totalPages, onPageChange, loading }: PaginationProps) {
   const handlePrevious = () => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1)

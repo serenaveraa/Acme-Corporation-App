@@ -1,4 +1,3 @@
-import React from 'react'
 
 interface SearchStatsProps {
   total: number
@@ -7,7 +6,7 @@ interface SearchStatsProps {
   searchTerm: string
 }
 
-const SearchStats: React.FC<SearchStatsProps> = ({ total, currentPage, limit, searchTerm }) => {
+function SearchStats({ total, currentPage, limit, searchTerm }: SearchStatsProps) {
   const startIndex = (currentPage - 1) * limit + 1
   const endIndex = Math.min(currentPage * limit, total)
 

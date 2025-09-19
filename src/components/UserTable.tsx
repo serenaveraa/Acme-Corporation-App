@@ -1,4 +1,3 @@
-import React from 'react'
 import { User } from '../models/UserModels'
 import LoadingSpinner from './LoadingSpinner'
 
@@ -8,7 +7,7 @@ interface UserTableProps {
   onUserClick: (user: User) => void
 }
 
-const UserTable: React.FC<UserTableProps> = ({ users, loading, onUserClick }) => {
+function UserTable({ users, loading, onUserClick }: UserTableProps) {
   if (loading) {
     return (
       <div className="bg-white border border-black rounded-lg overflow-hidden">

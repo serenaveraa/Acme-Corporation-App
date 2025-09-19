@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
-const Navbar: React.FC = () => {
+function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const toggleMenu = () => {
@@ -31,7 +31,6 @@ const Navbar: React.FC = () => {
             </button>
           </div>
 
-          {/* Mobile Hamburger Menu */}
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
@@ -48,7 +47,6 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-gray-200">
             <div className="flex flex-col space-y-2 pt-4">

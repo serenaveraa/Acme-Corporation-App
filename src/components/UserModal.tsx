@@ -1,4 +1,3 @@
-import React from 'react'
 import { User } from '../models/UserModels'
 
 interface UserModalProps {
@@ -7,7 +6,7 @@ interface UserModalProps {
   onClose: () => void
 }
 
-const UserModal: React.FC<UserModalProps> = ({ user, isOpen, onClose }) => {
+function UserModal({ user, isOpen, onClose }: UserModalProps) {
   if (!isOpen || !user) {
     return null
   }

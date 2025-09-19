@@ -6,7 +6,7 @@ interface SearchBarProps {
   searchTerm: string
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onClear, searchTerm }) => {
+function SearchBar({ onSearch, onClear, searchTerm }: SearchBarProps) {
   const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

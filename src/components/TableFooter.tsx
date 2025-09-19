@@ -1,4 +1,3 @@
-import React from 'react';
 
 interface TableFooterProps {
   total: number;
@@ -9,14 +8,14 @@ interface TableFooterProps {
   onPageChange: (page: number) => void;
 }
 
-const TableFooter: React.FC<TableFooterProps> = ({ 
+function TableFooter({ 
   total, 
   currentPage, 
   pageSize, 
   searchTerm, 
   loading, 
   onPageChange 
-}) => {
+}: TableFooterProps) {
   if (loading) return null;
 
   const totalPages = Math.ceil(total / pageSize);
@@ -100,6 +99,6 @@ const TableFooter: React.FC<TableFooterProps> = ({
       )}
     </div>
   );
-};
+}
 
 export default TableFooter;

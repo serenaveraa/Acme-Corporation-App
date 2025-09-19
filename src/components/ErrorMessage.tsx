@@ -1,4 +1,3 @@
-import React from 'react';
 
 interface ErrorMessageProps {
   error: string;
@@ -6,11 +5,11 @@ interface ErrorMessageProps {
   showRetry?: boolean;
 }
 
-const ErrorMessage: React.FC<ErrorMessageProps> = ({ 
+function ErrorMessage({ 
   error, 
   onRetry, 
   showRetry = true 
-}) => {
+}: ErrorMessageProps) {
   return (
     <div className="border border-red-500 rounded-lg p-6 text-center">
       <div className="w-12 h-12 mx-auto mb-4 border border-red-500 rounded-full flex items-center justify-center">
@@ -33,6 +32,6 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
       )}
     </div>
   );
-};
+}
 
 export default ErrorMessage;
