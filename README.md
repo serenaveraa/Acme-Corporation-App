@@ -73,6 +73,9 @@ src/
 └── index.css                # Global styles with TailwindCSS
 ```
 
+## 🛠️ Possible fixes 
+
+cache the response after it’s received to avoid redundant requests and improve load times.
 ## 📄 License
 
 This project is under the MIT License. See the `LICENSE` file for more details.
