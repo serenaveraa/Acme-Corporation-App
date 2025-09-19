@@ -26,10 +26,10 @@ A modern React application for user management with search, pagination, and deta
 
 ### Installation Steps
 
-1. **Clone the repository**
+1. **Clone the repository and locate on the app**
    ```bash
-   git clone <repository-url>
-   cd Acme-Corporation-App
+   git clone https://github.com/serenaveraa/Acme-Corporation-App.git
+   cd Acme-Corporation-App/app
    ```
 
 2. **Install dependencies**
@@ -39,7 +39,7 @@ A modern React application for user management with search, pagination, and deta
 
 3. **Run the application**
    ```bash
-   npm run dev
+   npm start
    ```
 
 4. **Open in browser**
