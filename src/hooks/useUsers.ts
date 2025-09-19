@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
 import { User, UsersResponse, SearchResponse } from '../models/UserModels';
 
 const API_BASE_URL = 'https://dummyjson.com/users';
@@ -10,7 +11,7 @@ export const useUsers = () => {
   const [total, setTotal] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const [limit] = useState(5); // 5 users per page as mentioned in README
+  const [limit] = useState(5);
 
   const fetchUsers = useCallback(async (page: number = 1, search: string = '') => {
     setLoading(true);
@@ -18,27 +19,32 @@ export const useUsers = () => {
 
     try {
       const skip = (page - 1) * limit;
-      let url: string;
+      const params = new URLSearchParams();
       
       if (search.trim()) {
-        url = `${API_BASE_URL}/search?q=${encodeURIComponent(search)}&limit=${limit}&skip=${skip}`;
+        params.append('q', search);
+        params.append('limit', limit.toString());
+        params.append('skip', skip.toString());
+        const response = await axios.get<SearchResponse>(`${API_BASE_URL}/search`, { params });
+        const data = response.data;
+        setUsers(data.users);
+        setTotal(data.total);
       } else {
-        url = `${API_BASE_URL}?limit=${limit}&skip=${skip}`;
+        params.append('limit', limit.toString());
+        params.append('skip', skip.toString());
+        const response = await axios.get<UsersResponse>(API_BASE_URL, { params });
+        const data = response.data;
+        setUsers(data.users);
+        setTotal(data.total);
       }
-
-      const response = await fetch(url);
       
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data: UsersResponse | SearchResponse = await response.json();
-      
-      setUsers(data.users);
-      setTotal(data.total);
       setCurrentPage(page);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data?.message || err.message || 'An error occurred');
+      } else {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+      }
       setUsers([]);
       setTotal(0);
     } finally {
@@ -46,16 +52,14 @@ export const useUsers = () => {
     }
   }, [limit]);
 
-  // Debounced search effect
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       fetchUsers(1, searchTerm);
-    }, 400); // 400ms debounce as mentioned in README
+    }, 400);
 
     return () => clearTimeout(timeoutId);
   }, [searchTerm, fetchUsers]);
 
-  // Initial load
   useEffect(() => {
     fetchUsers(1);
   }, [fetchUsers]);
